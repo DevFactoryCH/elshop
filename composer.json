@@ -1,0 +1,25 @@
+{
+    "name": "devfactory/elshop",
+    "description": "",
+    "authors": [
+        {
+            "name": "Greg Marineau",
+            "email": "greg.marineau@devfactory.ch"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/controllers",
+            "src/migrations",
+            "src/models"
+        ],
+        "psr-0": {
+            "Devfactory\\Elshop\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
