@@ -6,7 +6,7 @@ use Input;
 use Redirect;
 use Validator;
 
-use Language;
+use Devfactory\Elshop\Models\Language;
 
 class LanguageController extends \BaseController
 {

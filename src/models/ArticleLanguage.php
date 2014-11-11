@@ -1,4 +1,7 @@
 <?php
+
+namespace Devfactory\Elshop\Models;
+
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ArticleLanguage extends Eloquent {
@@ -10,11 +13,11 @@ class ArticleLanguage extends Eloquent {
   );
 
   public function Article() {
-    return $this->belongsTo('Article');
+    return $this->belongsTo('Devfactory\Elshop\Models\Article');
   }
 
   public function Language() {
-    return $this->belongsTo('Language');
+    return $this->belongsTo('Devfactory\Elshop\Models\Language');
   }
   
 }

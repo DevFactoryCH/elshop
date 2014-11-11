@@ -7,10 +7,10 @@ use Redirect;
 use Validator;
 use Str;
 
-use Article;
-use Brand;
-use ArticleLanguage;
-use Language;
+use Devfactory\Elshop\Models\Article;
+use Devfactory\Elshop\Models\Brand;
+use Devfactory\Elshop\Models\ArticleLanguage;
+use Devfactory\Elshop\Models\Language;
 
 class ArticleController extends \BaseController
 {

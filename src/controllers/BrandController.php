@@ -4,8 +4,9 @@ namespace Devfactory\Elshop\Controllers;
 use View;
 use Input;
 use Redirect;
-use Brand;
 use Validator;
+
+use Devfactory\Elshop\Models\Brand;
 
 class BrandController extends \BaseController
 {

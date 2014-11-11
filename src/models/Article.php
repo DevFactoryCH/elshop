@@ -1,4 +1,7 @@
 <?php
+
+namespace Devfactory\Elshop\Models;
+
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Article extends Eloquent {
@@ -13,7 +16,7 @@ class Article extends Eloquent {
   );
 
   public function brand() {
-    return $this->belongsTo('Brand');
+    return $this->belongsTo('Devfactory\Elshop\Models\Brand');
   }
 
   /**
@@ -23,12 +26,12 @@ class Article extends Eloquent {
    */
   public function content($language_id = NULL) {
     if ($language_id) {
-      return $this->hasOne('ArticleLanguage', 'article_id')->where('language_id', $language->id);
+      return $this->hasOne('Devfactory\Elshop\Models\ArticleLanguage', 'article_id')->where('language_id', $language->id);
     }
     else {
       $language = Language::where('default', TRUE)->first();
       
-      return $this->hasOne('ArticleLanguage', 'article_id')->where('language_id', $language->id);
+      return $this->hasOne('Devfactory\Elshop\Models\ArticleLanguage', 'article_id')->where('language_id', $language->id);
     }
   }
   
