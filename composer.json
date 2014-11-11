@@ -17,7 +17,7 @@
             "src/migrations",
             "src/models"
         ],
-        "psr-0": {
+        "psr-4": {
             "Devfactory\\Elshop\\": "src/"
         }
     },
