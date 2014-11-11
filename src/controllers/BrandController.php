@@ -19,7 +19,7 @@ class BrandController extends \BaseController
   {
     $brands = Brand::all();
 
-    return View::make('devfactory/elshop::brands.index', compact('brands'));
+    return View::make('elshop::brands.index', compact('brands'));
   }
 
 
@@ -30,7 +30,7 @@ class BrandController extends \BaseController
    */
   public function create()
   {
-    return View::make('devfactory/elshop::brands.create');
+    return View::make('elshop::brands.create');
   }
 
 

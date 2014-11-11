@@ -20,7 +20,7 @@ class ElshopServiceProvider extends ServiceProvider {
   public function boot()
   {
     $this->package('devfactory/elshop', 'elshop', __DIR__);
-    include __DIR__ . 'routes.php';
+    include __DIR__ . '/routes.php';
   }
 
   /**

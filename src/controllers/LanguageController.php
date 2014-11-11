@@ -20,7 +20,7 @@ class LanguageController extends \BaseController
   {
     $languages =  Language::all();
 
-    return View::make('devfactory/elshop::languages.index', compact('languages'));
+    return View::make('elshop::languages.index', compact('languages'));
   }
 
 
@@ -32,7 +32,7 @@ class LanguageController extends \BaseController
   public function create()
   {
 
-    return View::make('devfactory/elshop::languages.create');
+    return View::make('elshop::languages.create');
   }
 
 

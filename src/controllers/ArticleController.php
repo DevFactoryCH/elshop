@@ -24,7 +24,7 @@ class ArticleController extends \BaseController
   {
     $articles = Article::all();
 
-    return View::make('devfactory/elshop::articles.index', compact('articles'));
+    return View::make('elshop::articles.index', compact('articles'));
   }
 
 
@@ -38,7 +38,7 @@ class ArticleController extends \BaseController
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     
-    return View::make('devfactory/elshop::articles.create', compact('brands'));
+    return View::make('elshop::articles.create', compact('brands'));
   }
 
 
@@ -101,7 +101,7 @@ class ArticleController extends \BaseController
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
 
-    return View::make('devfactory/elshop::articles.edit', compact('article', 'brands'));
+    return View::make('elshop::articles.edit', compact('article', 'brands'));
   }
 
 
