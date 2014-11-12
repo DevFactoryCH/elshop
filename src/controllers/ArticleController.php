@@ -36,10 +36,11 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
+    $prefix = $this->prefix;
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     
-    return View::make('elshop::articles.create', compact('brands'));
+    return View::make('elshop::articles.create', compact('brands', 'prefix'));
   }
 
 
