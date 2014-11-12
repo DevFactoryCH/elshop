@@ -9,16 +9,8 @@ use Config;
 
 use Devfactory\Elshop\Models\Language;
 
-class LanguageController extends \BaseController
+class LanguageController extends \Devfactory\Elshop\Controllers\ElshopController
 {
-  protected $prefix;
-
-  public function __construct() {
-    $this->prefix = Config::get('elshop::route_prefix');
-    if (!empty($this->prefix)) {
-      $this->prefix = $this->prefix . '.';
-    }
-  }
   /**
    * Display a listing of the resource.
    *
