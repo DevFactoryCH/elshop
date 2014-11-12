@@ -14,6 +14,14 @@ use Devfactory\Elshop\Models\Language;
 
 class ArticleController extends \BaseController
 {
+  protected $prefix;
+
+  public function __construct() {
+    $this->prefix = Config::get('elshop::route_prefix');
+    if (!empty($this->prefix)) {
+      $this->prefix = $this->prefix . '.';
+    }
+  }
 
   /**
    * Display a listing of the resource.
@@ -73,7 +81,7 @@ class ArticleController extends \BaseController
     $article_language->slug = Str::slug(Input::get('name'));
     $article_language->save();
 
-    return Redirect::route('articles.index');
+    return Redirect::route($this->prefix . 'articles.index');
   }
 
 
@@ -135,7 +143,7 @@ class ArticleController extends \BaseController
     $article_language->slug = Str::slug(Input::get('name'));
     $article_language->save();
 
-    return Redirect::route('articles.index');
+    return Redirect::route($this->prefix . 'articles.index');
   }
 
 

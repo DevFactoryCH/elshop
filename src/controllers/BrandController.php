@@ -10,7 +10,14 @@ use Devfactory\Elshop\Models\Brand;
 
 class BrandController extends \BaseController
 {
+  protected $prefix;
 
+  public function __construct() {
+    $this->prefix = Config::get('elshop::route_prefix');
+    if (!empty($this->prefix)) {
+      $this->prefix = $this->prefix . '.';
+    }
+  }
   /**
    * Display a listing of the resource.
    *
@@ -31,7 +38,8 @@ class BrandController extends \BaseController
    */
   public function create()
   {
-    return View::make('elshop::brands.create');
+    $prefix = $this->prefix;
+    return View::make('elshop::brands.create', compact('prefix'));
   }
 
 
@@ -52,7 +60,7 @@ class BrandController extends \BaseController
     $brand->status = TRUE;
     $brand->save();
 
-    return Redirect::route('brands.index');
+    return Redirect::route($this->prefix . 'brands.index');
   }
 
 
