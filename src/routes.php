@@ -11,6 +11,8 @@
 |
 */
 
-Route::resource('brands', 'Devfactory\Elshop\Controllers\BrandController');
-Route::resource('articles', 'Devfactory\Elshop\Controllers\ArticleController');
-Route::resource('languages', 'Devfactory\Elshop\Controllers\LanguageController');
+$prefix = Config::get('elshop::route_prefix');
+
+Route::resource($prefix . 'brands', 'Devfactory\Elshop\Controllers\BrandController');
+Route::resource($prefix . 'articles', 'Devfactory\Elshop\Controllers\ArticleController');
+Route::resource($prefix . 'languages', 'Devfactory\Elshop\Controllers\LanguageController');
