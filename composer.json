@@ -9,7 +9,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.2.*"
+        "illuminate/support": "4.2.*",
+        "devfactory/media": "1.0.*",
+        "devfactory/taxonomy": "2.0.*"
     },
     "autoload": {
         "classmap": [
