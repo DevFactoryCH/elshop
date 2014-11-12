@@ -4,7 +4,7 @@
 
   <div class="box box-primary">
     <div class="box-body">
-      {{ Form::open(array('route' => 'languages.store')) }}
+      {{ Form::open(array('route' => $prefix . 'languages.store')) }}
         <div class="form-group">
           {{ Form::label('language', 'Language') }}
           {{ Form::text('language', Input::get('language'), array('class' => 'form-control')) }}

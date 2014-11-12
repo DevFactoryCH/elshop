@@ -5,6 +5,7 @@ use View;
 use Input;
 use Redirect;
 use Validator;
+use Config;
 
 use Devfactory\Elshop\Models\Language;
 
@@ -25,9 +26,10 @@ class LanguageController extends \BaseController
    */
   public function index()
   {
+    $prefix = $this->prefix;
     $languages =  Language::all();
 
-    return View::make('elshop::languages.index', compact('languages'));
+    return View::make('elshop::languages.index', compact('languages', 'prefix'));
   }
 
 

@@ -3,7 +3,7 @@
 @section('content')
 
   <p>
-    <a href="{{ route('articles.create') }}" class="btn btn-primary">Add an article</a>
+    <a href="{{ route($prefix . 'articles.create') }}" class="btn btn-primary">Add an article</a>
   </p>
 
   <div class="box box-primary">
@@ -27,10 +27,10 @@
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
             <td class="text-right">
-              <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-success btn-xs pull-right">
+              <a href="{{ route($prefix . 'articles.edit', $article->id) }}" class="btn btn-success btn-xs pull-right">
                 Edit
               </a>
-              {{ Form::open(array('route' => array('articles.destroy', $article->id), 'method' => 'DELETE')) }}
+              {{ Form::open(array('route' => array($prefix . 'articles.destroy', $article->id), 'method' => 'DELETE')) }}
                 {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-xs pull-right')) }}
               {{ Form::close() }}
           </tr>

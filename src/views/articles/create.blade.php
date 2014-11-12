@@ -4,7 +4,7 @@
 
   <div class="box box-primary">
     <div class="box-body">
-      {{ Form::open(array('route' => 'articles.store')) }}
+      {{ Form::open(array('route' => $prefix . 'articles.store')) }}
         <div class="row">
           <div class="form-group col-sm-10">
             {{ Form::label('name', trans('article.name')) }}

@@ -5,6 +5,7 @@ use View;
 use Input;
 use Redirect;
 use Validator;
+use Config;
 
 use Devfactory\Elshop\Models\Brand;
 
@@ -25,9 +26,10 @@ class BrandController extends \BaseController
    */
   public function index()
   {
+    $prefix = $this->prefix;
     $brands = Brand::all();
 
-    return View::make('elshop::brands.index', compact('brands'));
+    return View::make('elshop::brands.index', compact('brands', 'prefix'));
   }
 
 

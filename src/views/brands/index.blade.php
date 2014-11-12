@@ -3,7 +3,7 @@
 @section('content')
 
   <p>
-    <a href="{{ route('brands.create') }}" class="btn btn-primary">Add a brand</a>
+    <a href="{{ route($prefix . 'brands.create') }}" class="btn btn-primary">Add a brand</a>
   </p>
 
   <div class="box box-primary">
@@ -27,7 +27,7 @@
               @endif
             </td>
             <td class="text-right">
-              {{ Form::open(array('route' => array('brands.destroy', $brand->id), 'method' => 'DELETE')) }}
+              {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE')) }}
                 {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-xs')) }}
               {{ Form::close() }}
             </td>

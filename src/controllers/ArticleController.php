@@ -6,6 +6,7 @@ use Input;
 use Redirect;
 use Validator;
 use Str;
+use Config;
 
 use Devfactory\Elshop\Models\Article;
 use Devfactory\Elshop\Models\Brand;
@@ -30,9 +31,10 @@ class ArticleController extends \BaseController
    */
   public function index()
   {
+    $prefix = $this->prefix;
     $articles = Article::all();
 
-    return View::make('elshop::articles.index', compact('articles'));
+    return View::make('elshop::articles.index', compact('articles', 'prefix'));
   }
 
 
@@ -105,11 +107,12 @@ class ArticleController extends \BaseController
    */
   public function edit($id)
   {
+    $prefix = $this->prefix;
     $article = Article::find($id);
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
 
-    return View::make('elshop::articles.edit', compact('article', 'brands'));
+    return View::make('elshop::articles.edit', compact('article', 'brands', 'prefix'));
   }
 
 
