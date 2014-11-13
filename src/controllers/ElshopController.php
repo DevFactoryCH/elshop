@@ -12,5 +12,6 @@ class ElshopController extends \BaseController
     if (!empty($this->prefix)) {
       $this->prefix = $this->prefix . '.';
     }
+    View::composer('taxonomy::*', 'Devfactory\Elshop\Composers\ElshopComposer');
   }
 }

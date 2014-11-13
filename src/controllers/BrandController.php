@@ -18,10 +18,9 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $prefix = $this->prefix;
     $brands = Brand::all();
 
-    return View::make('elshop::brands.index', compact('brands', 'prefix'));
+    return View::make('elshop::brands.index', compact('brands'));
   }
 
 
@@ -32,8 +31,7 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    $prefix = $this->prefix;
-    return View::make('elshop::brands.create', compact('prefix'));
+    return View::make('elshop::brands.create');
   }
 
 

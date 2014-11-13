@@ -22,10 +22,9 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $prefix = $this->prefix;
     $articles = Article::all();
 
-    return View::make('elshop::articles.index', compact('articles', 'prefix'));
+    return View::make('elshop::articles.index', compact('articles'));
   }
 
 
@@ -36,11 +35,10 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    $prefix = $this->prefix;
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     
-    return View::make('elshop::articles.create', compact('brands', 'prefix'));
+    return View::make('elshop::articles.create', compact('brands'));
   }
 
 
