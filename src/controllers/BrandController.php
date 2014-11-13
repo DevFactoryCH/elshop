@@ -76,7 +76,16 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function edit($id)
   {
-    //
+    $validator = Validator::make(Input::All(), Brand::$rules);
+    if ($validator->fails()) {
+      return Redirect::back()->withInput()->withErrors($validator);
+    }
+
+    $brand = Brand::find($id);
+    $brand->name = Input::get('name');
+    $brand->save();
+    
+    return Redirect::route($this->prefix . 'brands.index');
   }
 
 

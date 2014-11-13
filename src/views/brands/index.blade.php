@@ -27,6 +27,9 @@
               @endif
             </td>
             <td class="text-right">
+              <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
+                @lang('brand.edit')
+              </a>
               {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE')) }}
                 {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-xs')) }}
               {{ Form::close() }}

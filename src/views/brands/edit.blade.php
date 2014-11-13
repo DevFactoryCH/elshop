@@ -3,13 +3,13 @@
 @section('content')
   <div class="box box-primary">
     <div class="box-body">
-      {{ Form::open(array('route' => $prefix . 'brands.store')) }}
+      {{ Form::open(array('route' => array($prefix . 'brands.store', $brand->id), 'method' => 'PUT')) }}
         <div class="form-group">
           {{ Form::label('name', trans('brand.name')) }}
-          {{ Form::text('name', Input::get('name'), array('class' => 'form-control')) }}
+          {{ Form::text('name', $brand->name, array('class' => 'form-control')) }}
           {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
         </div>
-        {{ Form::submit(trans('brand.add'), array('class' => 'btn btn-primary')) }}
+        {{ Form::submit(trans('brand.edit'), array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
     </div>
   </div>
