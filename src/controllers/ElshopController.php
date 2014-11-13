@@ -2,6 +2,7 @@
 namespace Devfactory\Elshop\Controllers;
 
 use Config;
+use View;
 
 class ElshopController extends \BaseController
 {
@@ -12,6 +13,6 @@ class ElshopController extends \BaseController
     if (!empty($this->prefix)) {
       $this->prefix = $this->prefix . '.';
     }
-    View::composer('taxonomy::*', 'Devfactory\Elshop\Composers\ElshopComposer');
+    View::composer('elshop::*', 'Devfactory\Elshop\Composers\ElshopComposer');
   }
 }
