@@ -19,13 +19,6 @@
         @foreach ($brands as $brand)
           <tr>
             <td>{{ $brand->name }}</td>
-            <td class="text-center">
-              @if ($brand->status)
-                <a href="" class="btn btn-success btn-xs">Oui</a>
-              @else
-                Non
-              @endif
-            </td>
             <td class="text-right">
               <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
                 @lang('brand.edit')

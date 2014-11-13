@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
-        "devfactory/taxonomy": "2.0.1"
+        "devfactory/taxonomy": "2.0.*"
     },
     "autoload": {
         "psr-4": {
