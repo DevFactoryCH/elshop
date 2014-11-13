@@ -18,10 +18,9 @@ class LanguageController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $prefix = $this->prefix;
     $languages =  Language::all();
 
-    return View::make('elshop::languages.index', compact('languages', 'prefix'));
+    return View::make('elshop::languages.index', compact('languages'));
   }
 
 
@@ -32,7 +31,6 @@ class LanguageController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-
     return View::make('elshop::languages.create');
   }
 

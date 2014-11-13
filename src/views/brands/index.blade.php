@@ -31,7 +31,7 @@
                 @lang('brand.edit')
               </a>
               {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE')) }}
-                {{ Form::submit('Delete', array('class' => 'btn btn-danger btn-xs')) }}
+                {{ Form::submit(trans('brand.delete'), array('class' => 'btn btn-danger btn-xs')) }}
               {{ Form::close() }}
             </td>
           </tr>

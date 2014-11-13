@@ -3,7 +3,7 @@
 @section('content')
   <div class="box box-primary">
     <div class="box-body">
-      {{ Form::open(array('route' => array($prefix . 'brands.store', $brand->id), 'method' => 'PUT')) }}
+      {{ Form::open(array('route' => array($prefix . 'brands.update', $brand->id), 'method' => 'PUT')) }}
         <div class="form-group">
           {{ Form::label('name', trans('brand.name')) }}
           {{ Form::text('name', $brand->name, array('class' => 'form-control')) }}
