@@ -11,6 +11,7 @@
     "php": ">=5.4.0",
     "illuminate/support": "4.2.*",
     "devfactory/taxonomy": "2.0.*",
+    "devfactory/media": "1.0.0",
     "gloudemans/shoppingcart": "~1.2"
   },
   "autoload": {
