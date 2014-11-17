@@ -37,8 +37,14 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
   {
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
+    $vocabulary_name = Config::get('elshop::vocabulary_name');
+    $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
+    $terms = array('' => NULL);
+    foreach ($rubric->terms()->get() as $term) {
+      $terms[$term->id] = $term->name;
+    }
     
-    return View::make('elshop::articles.create', compact('brands'));
+    return View::make('elshop::articles.create', compact('brands', 'terms'));
   }
 
 

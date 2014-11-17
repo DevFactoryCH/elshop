@@ -6,7 +6,7 @@
     <div class="box-body">
       {{ Form::open(array('route' => $prefix . 'articles.store')) }}
         <div class="row">
-          <div class="form-group col-sm-10">
+          <div class="form-group col-sm-8">
             {{ Form::label('name', trans('elshop::article.name')) }}
             {{ Form::text('name', Input::get('name'), array('class' => 'form-control')) }}
             {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
@@ -14,6 +14,10 @@
           <div class="form-group col-sm-2">
             {{ Form::label('brand', trans('elshop::article.brand')) }}
             {{ Form::select('brand', $brands, Input::get('brand'), array('class' => 'form-control')) }}
+          </div>
+          <div class="form-group col-sm-2">
+            {{ Form::label('term', trans('elshop::article.term')) }}
+            {{ Form::select('term', $terms, Input::get('term'), array('class' => 'form-control')) }}
           </div>
         </div>
         <div class="form-group">
