@@ -7,6 +7,7 @@ use Redirect;
 use Validator;
 use Str;
 use Config;
+use Taxonomy;
 
 use Devfactory\Elshop\Models\Article;
 use Devfactory\Elshop\Models\Brand;
