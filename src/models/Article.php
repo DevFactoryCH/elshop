@@ -6,6 +6,8 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Article extends Eloquent {
 
+  use \Devfactory\Taxonomy\TaxonomyTrait;
+
   public static $rules = array(
     'name' => 'required',
     'price' => 'required|numeric',
