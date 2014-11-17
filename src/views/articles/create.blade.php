@@ -51,7 +51,7 @@
             {{ $errors->first('ean13', '<span class="text-danger">:message</span>') }}
           </div>
         </div>
-        {{ Form::submit(trans('article.add'), array('class' => 'btn btn-primary')) }}
+        {{ Form::submit(trans('elshop::article.add'), array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
     </div>
   </div>

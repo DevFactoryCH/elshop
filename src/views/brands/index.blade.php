@@ -12,7 +12,6 @@
         <thead>
           <tr>
             <th>Brand</th>
-            <th class="text-center">Status</th>
             <th></th>
           </tr>
         </thead>
@@ -20,10 +19,10 @@
           <tr>
             <td>{{ $brand->name }}</td>
             <td class="text-right">
-              <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
-                @lang('brand.edit')
-              </a>
-              {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE')) }}
+              {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE', 'class' => 'btn-group')) }}
+                <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
+                  @lang('elshop::brand.edit')
+                </a>
                 {{ Form::submit(trans('brand.delete'), array('class' => 'btn btn-danger btn-xs')) }}
               {{ Form::close() }}
             </td>
