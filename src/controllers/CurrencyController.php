@@ -31,7 +31,7 @@ class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    return View::make('elshop::brands.create');
+    return View::make('elshop::currencies.create');
   }
 
 
@@ -47,12 +47,18 @@ class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $brand = new Currency();
-    $brand->name = Input::get('name');
-    $brand->status = TRUE;
-    $brand->save();
+    $currency = new Currency();
+    $currency->name = Input::get('name');
+    $currency->iso_code = Input::get('iso_code');
+    $currency->sign = Input::get('sign');
+    $currency->status = TRUE;
+    $currency->default = FALSE;
+    if (!Currency::count()) {
+      $currency->default = TRUE;
+    }
+    $currency->save();
 
-    return Redirect::route($this->prefix . 'brands.index');
+    return Redirect::route($this->prefix . 'currencies.index');
   }
 
 
@@ -111,8 +117,8 @@ class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function destroy($id)
   {
-    $brand = Brand::find($id);
-    $brand->delete();
+    $currency = Currency::find($id);
+    $currency->delete();
 
     return Redirect::back();
   }
