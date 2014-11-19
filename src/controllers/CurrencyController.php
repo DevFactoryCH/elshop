@@ -7,9 +7,9 @@ use Redirect;
 use Validator;
 use Config;
 
-use Devfactory\Elshop\Models\Brand;
+use Devfactory\Elshop\Models\Currency;
 
-class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
+class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
 {
   /**
    * Display a listing of the resource.
@@ -18,9 +18,9 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $brands = Brand::all();
+    $currencies = Currency::all();
 
-    return View::make('elshop::brands.index', compact('brands'));
+    return View::make('elshop::currencies.index', compact('currencies'));
   }
 
 
@@ -42,12 +42,12 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function store()
   {
-    $validator = Validator::make(Input::All(), Brand::$rules);
+    $validator = Validator::make(Input::All(), Currency::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $brand = new Brand();
+    $brand = new Currency();
     $brand->name = Input::get('name');
     $brand->status = TRUE;
     $brand->save();
