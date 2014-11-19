@@ -17,8 +17,8 @@ class ArticlePrice extends Eloquent {
     return $this->belongsTo('Devfactory\Elshop\Models\Article');
   }
 
-  public function Language() {
-    return $this->belongsTo('Devfactory\Elshop\Models\Language');
+  public function Currency() {
+    return $this->belongsTo('Devfactory\Elshop\Models\Currency');
   }
   
 }

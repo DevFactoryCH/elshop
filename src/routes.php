@@ -13,9 +13,21 @@
 
 $prefix = Config::get('elshop::route_prefix');
 
-Route::group(array('prefix' => $prefix), function() {
+Route::group(array('prefix' => $prefix), function() use ($prefix) {
   Route::resource('brands', 'Devfactory\Elshop\Controllers\BrandController');
   Route::resource('articles', 'Devfactory\Elshop\Controllers\ArticleController');
   Route::resource('languages', 'Devfactory\Elshop\Controllers\LanguageController');
   Route::resource('currencies', 'Devfactory\Elshop\Controllers\CurrencyController');
+
+  Route::post('articles/store_price/{id}', array(
+    'as' => $prefix . '.articles.store_price',
+    'uses' => 'Devfactory\Elshop\Controllers\ArticleController@storePrice',
+  ));
+
+  Route::get('articles/destroy_price/{id}', array(
+    'as' => $prefix . '.articles.destroy_price',
+    'uses' => 'Devfactory\Elshop\Controllers\ArticleController@destroyPrice',
+  ));
+
 });
+

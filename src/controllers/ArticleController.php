@@ -13,6 +13,8 @@ use Devfactory\Elshop\Models\Article;
 use Devfactory\Elshop\Models\Brand;
 use Devfactory\Elshop\Models\ArticleLanguage;
 use Devfactory\Elshop\Models\Language;
+use Devfactory\Elshop\Models\Currency;
+use Devfactory\Elshop\Models\ArticlePrice;
 
 class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
 {
@@ -36,6 +38,8 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
+    $currencies = Currency::lists('id', 'iso_code');
+    $currencies = array_flip($currencies);
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     $vocabulary_name = Config::get('elshop::vocabulary_name');
@@ -45,7 +49,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
       $terms[$term->id] = $term->name;
     }
 
-    return View::make('elshop::articles.create', compact('brands', 'terms'));
+    return View::make('elshop::articles.create', compact('brands', 'terms', 'currencies'));
   }
 
 
@@ -62,8 +66,6 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $article = new Article();
-    $article->price = Input::get('price') * 100;
-    $article->sale_price = Input::get('sale_price') * 100;
     $article->weight = Input::get('weight');
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
@@ -80,6 +82,13 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article_language->slug = Str::slug(Input::get('name'));
     $article_language->save();
 
+    $article_price = new ArticlePrice();
+    $article_price->price = Input::get('price') * 100;
+    $article_price->sale_price = FALSE;
+    $article_price->article_id = $article->id;
+    $article_price->currency_id = Input::get('currency');
+    $article_price->save();
+
     return Redirect::route($this->prefix . 'articles.index');
   }
 
@@ -92,7 +101,17 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function show($id)
   {
-    //
+    $currencies = Currency::all();
+    $select_currencies = array();
+    foreach ($currencies as $currency) {
+      if (!ArticlePrice::where('article_id', $id)->where('currency_id', $currency->id)->where('sale_price', TRUE)->count()) {
+        $select_currencies[$currency->id] = $currency->iso_code;
+      }
+    }
+    $currencies = $select_currencies;
+    $article = Article::find($id);
+
+    return View::make('elshop::articles.show', compact('article', 'currencies'));
   }
 
 
@@ -157,6 +176,24 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
   {
     $article = Article::find($id);
     $article->delete();
+
+    return Redirect::back();
+  }
+
+  public function storePrice($id) {
+    $article_price = new ArticlePrice();
+    $article_price->price = Input::get('price') * 100;
+    $article_price->sale_price = TRUE;
+    $article_price->article_id = $id;
+    $article_price->currency_id = Input::get('currency');
+    $article_price->save();
+
+    return Redirect::route($this->prefix . 'articles.show', $id);
+  }
+
+  public function destroyPrice($id) {
+    $article_price = ArticlePrice::find($id);
+    $article_price->delete();
 
     return Redirect::back();
   }

@@ -32,14 +32,14 @@
         </div>
         <div class="row">
           <div class="form-group col-sm-3">
-            {{ Form::label('price', trans('elshop::article.price')) }}
+            {{ Form::label('price', trans('elshop::article.purchasing_price')) }}
             {{ Form::text('price', Input::get('price'), array('class' => 'form-control')) }}
             {{ $errors->first('price', '<span class="text-danger">:message</span>') }}
           </div>
           <div class="form-group col-sm-3">
-            {{ Form::label('sale_price', trans('elshop::article.sale_price')) }}
-            {{ Form::text('sale_price', Input::get('sale_price'), array('class' => 'form-control')) }}
-            {{ $errors->first('sale_price', '<span class="text-danger">:message</span>') }}
+            {{ Form::label('currency', trans('elshop::article.currency')) }}
+            {{ Form::select('currency', $currencies, Input::get('sale_price'), array('class' => 'form-control')) }}
+            {{ $errors->first('currency', '<span class="text-danger">:message</span>') }}
           </div>
           <div class="form-group col-sm-3">
             {{ Form::label('weight', trans('elshop::article.weight')) }}

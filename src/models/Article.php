@@ -11,7 +11,6 @@ class Article extends Eloquent {
   public static $rules = array(
     'name' => 'required',
     'price' => 'required|numeric',
-    'sale_price' => 'required|numeric',
     'weight' => 'required|numeric',
     'ean13' => 'numeric',
     'description' => 'required',
@@ -19,6 +18,14 @@ class Article extends Eloquent {
 
   public function brand() {
     return $this->belongsTo('Devfactory\Elshop\Models\Brand');
+  }
+
+  public function prices() {
+    return $this->hasMany('Devfactory\Elshop\Models\ArticlePrice')->where('sale_price', TRUE);
+  }
+
+  public function purchasing() {
+    return $this->hasOne('Devfactory\Elshop\Models\ArticlePrice')->where('sale_price', FALSE);
   }
 
   /**

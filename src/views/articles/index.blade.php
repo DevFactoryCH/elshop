@@ -21,9 +21,13 @@
         </thead>
         @foreach ($articles as $article)
           <tr>
-            <td>{{ $article->content->name }}</td>
-            <td class="text-center">{{ $article->price / 100 }}</td>
-            <td class="text-center">{{ $article->sale_price / 100 }}</td>
+            <td>
+              <a href="{{ route($prefix . 'articles.show', $article->id) }}">
+                {{ $article->content->name }}
+              </a>
+            </td>
+            <td class="text-center">{{ $article->purchasing->price / 100 }}</td>
+            <td class="text-center">{{ 'test' }}</td>
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
             <td class="text-right">
