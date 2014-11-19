@@ -17,4 +17,5 @@ Route::group(array('prefix' => $prefix), function() {
   Route::resource('brands', 'Devfactory\Elshop\Controllers\BrandController');
   Route::resource('articles', 'Devfactory\Elshop\Controllers\ArticleController');
   Route::resource('languages', 'Devfactory\Elshop\Controllers\LanguageController');
+  Route::resource('currencies', 'Devfactory\Elshop\Controllers\CurrencyController');
 });
