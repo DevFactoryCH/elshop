@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Devfactory\Elshop\Controllers;
 
 use View;
@@ -44,7 +44,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     foreach ($rubric->terms()->get() as $term) {
       $terms[$term->id] = $term->name;
     }
-    
+
     return View::make('elshop::articles.create', compact('brands', 'terms'));
   }
 
@@ -154,12 +154,10 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    * @return Response
    */
   public function destroy($id)
-  { 
+  {
     $article = Article::find($id);
     $article->delete();
 
     return Redirect::back();
   }
-
-
 }

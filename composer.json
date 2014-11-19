@@ -12,6 +12,7 @@
     "illuminate/support": "4.2.*",
     "devfactory/taxonomy": "2.0.*",
     "devfactory/imagecache": "2.0.0",
+    "devfactory/media": "1.0.0",
     "gloudemans/shoppingcart": "~1.2"
   },
   "autoload": {
