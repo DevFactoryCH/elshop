@@ -7,6 +7,7 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 class Article extends Eloquent {
 
   use \Devfactory\Taxonomy\TaxonomyTrait;
+  use \Devfactory\Media\MediaTrait;
 
   public static $rules = array(
     'name' => 'required',
@@ -22,6 +23,17 @@ class Article extends Eloquent {
 
   public function prices() {
     return $this->hasMany('Devfactory\Elshop\Models\ArticlePrice')->where('sale_price', TRUE);
+  }
+
+  public function price($currency_id = NULL) {
+    if (!$currency_id) {
+      $currency = Currency::where('default', TRUE)->first();
+    }
+    else {
+      $currency = Currency::where('id', $currency_id)->first();
+    }
+
+    return $this->hasOne('Devfactory\Elshop\Models\ArticlePrice')->where('sale_price', TRUE)->where('currency_id', $currency->id);
   }
 
   public function purchasing() {
@@ -42,6 +54,23 @@ class Article extends Eloquent {
       
       return $this->hasOne('Devfactory\Elshop\Models\ArticleLanguage', 'article_id')->where('language_id', $language->id);
     }
+  }
+
+  public function formatPrice($currency_id = NULL, $decimal = 2) {
+    if (!$currency_id) {
+      $currency = Currency::where('default', TRUE)->first();
+    }
+    else {
+      $currency = Currency::where('id', $currency_id)->first();
+    }
+
+    $price = $this->hasOne('Devfactory\Elshop\Models\ArticlePrice')->where('sale_price', TRUE)->where('currency_id', $currency->id)->first();
+    if ($price) {
+      $price = $price->price / 100;
+      return number_format($price, $decimal, '.', "'") . ' ' . $currency->sign;
+    }
+
+    return FALSE;
   }
   
 }
