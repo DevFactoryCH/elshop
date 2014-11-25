@@ -81,6 +81,22 @@
       </div>
     </div>
 
+  <div class="col-md-6">
+    <div class="box box-info">
+
+      <div class="box-header">
+        <i class="fa fa-picture"></i>
+        <h3 class="box-title">Multiple file upload</h3>
+      </div><!-- /.box-header -->
+
+      <div class="box-body">
+        {{ Form::multiUpload($article, 'images') }}
+
+      </div><!-- /.box-body -->
+
+    </div><!-- /.box -->
+  </div>
+
   </div>
 
 @stop

@@ -22,7 +22,7 @@
         @foreach ($articles as $article)
           <tr>
             <td>
-              <a href="{{ route($prefix . 'articles.show', $article->id) }}">
+              <a href="{{ route($prefix . 'articles.edit', $article->id) }}">
                 {{ $article->content->name }}
               </a>
             </td>

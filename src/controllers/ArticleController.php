@@ -123,12 +123,28 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function edit($id)
   {
-    $prefix = $this->prefix;
+    $vocabulary_name = Config::get('elshop::vocabulary_name');
+    $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
+    $terms = array('' => NULL);
+    foreach ($rubric->terms()->get() as $term) {
+      $terms[$term->id] = $term->name;
+    }
+
     $article = Article::find($id);
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
+    $currencies = Currency::all();
+    $select_currencies = array();
+    foreach ($currencies as $currency) {
+      if (!ArticlePrice::where('article_id', $id)->where('currency_id', $currency->id)->where('sale_price', TRUE)->count()) {
+        $select_currencies[$currency->id] = $currency->iso_code;
+      }
+    }
+    $currencies = $select_currencies;
+    $currencies_purchase = Currency::lists('id', 'iso_code');
+    $currencies_purchase = array_flip($currencies_purchase);
 
-    return View::make('elshop::articles.edit', compact('article', 'brands', 'prefix'));
+    return View::make('elshop::articles.edit', compact('article', 'brands', 'terms' , 'currencies', 'currencies_purchase'));
   }
 
 
@@ -188,7 +204,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article_price->currency_id = Input::get('currency');
     $article_price->save();
 
-    return Redirect::route($this->prefix . 'articles.show', $id);
+    return Redirect::route($this->prefix . 'articles.edit', $id);
   }
 
   public function destroyPrice($id) {
