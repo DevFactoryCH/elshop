@@ -31,12 +31,18 @@
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
             <td class="text-right">
-              {{ Form::open(array('route' => array($prefix . 'articles.destroy', $article->id), 'method' => 'DELETE', 'class' => 'btn-group')) }}
-                <a href="{{ route($prefix . 'articles.edit', $article->id) }}" class="btn btn-success btn-xs">
-                  @lang('elshop::article.edit')
-                </a>
-                {{ Form::submit(trans('elshop::article.delete'), array('class' => 'btn btn-danger btn-xs')) }}
-              {{ Form::close() }}
+              <div class="pull-right">
+                <div class="btn-group">
+                  {{ Form::open(array('route' => array($prefix . 'articles.edit', $article->id), 'method' => 'GET')) }}
+                    {{ Form::button(trans('elshop::article.edit'), array('class' => 'btn btn-primary btn-xs', 'type' => 'submit')) }}
+                  {{ Form::close() }}
+                </div>
+                <div class="btn-group">
+                  {{ Form::open(array('route' => array($prefix . 'articles.destroy', $article->id), 'method' => 'DELETE')) }}
+                    {{ Form::button(trans('elshop::article.delete'), array('class' => 'btn btn-danger btn-xs', 'type' => 'submit')) }}
+                  {{ Form::close() }}
+                </div>
+              </div>
             </td>
           </tr>
         @endforeach
