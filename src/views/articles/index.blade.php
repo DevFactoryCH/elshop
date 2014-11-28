@@ -3,7 +3,7 @@
 @section('content')
 
   <p>
-    <a href="{{ route($prefix . 'articles.create') }}" class="btn btn-primary">Add an article</a>
+    <a href="{{ route($prefix . 'articles.create') }}" class="btn btn-primary">@lang('elshop::article.add')</a>
   </p>
 
   <div class="box box-primary">
@@ -11,11 +11,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th class="text-center">Prix</th>
-            <th class="text-center">Prix de vente</th>
-            <th class="text-center">Marque</th>
-            <th class="text-center">Poids</th>
+            <th>@lang('elshop::article.name')</th>
+            <th class="text-center">@lang('elshop::article.price')</th>
+            <th class="text-center">@lang('elshop::article.purchasing_price')</th>
+            <th class="text-center">@lang('elshop::article.brand')</th>
+            <th class="text-center">@lang('elshop::article.weight')</th>
             <th></th>
           </tr>
         </thead>
@@ -26,8 +26,8 @@
                 {{ $article->content->name }}
               </a>
             </td>
-            <td class="text-center">{{ $article->purchasing->price / 100 }}</td>
-            <td class="text-center">{{ 'test' }}</td>
+            <td class="text-center">{{ number_format($article->purchasing->price / 100, 2, '.', "'") . ' ' . $article->purchasing->currency->sign }}</td>
+            <td class="text-center">{{ $article->formatPrice() }}</td>
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
             <td class="text-right">
