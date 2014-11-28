@@ -7,7 +7,7 @@
       {{ Form::open(array('route' => $prefix . 'articles.store')) }}
         <div class="row">
           <div class="form-group col-sm-8">
-            {{ Form::label('name', trans('elshop::article.name')) }}
+            {{ Form::label('name', trans('elshop::article.name')) }} <span class="text-danger">*</span>
             {{ Form::text('name', Input::get('name'), array('class' => 'form-control')) }}
             {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
           </div>
@@ -26,13 +26,13 @@
           {{ $errors->first('teaser', '<span class="text-danger">:message</span>') }}
         </div>
         <div class="form-group">
-          {{ Form::label('description', trans('elshop::article.description')) }}
+          {{ Form::label('description', trans('elshop::article.description')) }} <span class="text-danger">*</span>
           {{ Form::textarea('description', Input::get('name'), array('class' => 'form-control')) }}
           {{ $errors->first('description', '<span class="text-danger">:message</span>') }}
         </div>
         <div class="row">
           <div class="form-group col-sm-3">
-            {{ Form::label('price', trans('elshop::article.purchasing_price')) }}
+            {{ Form::label('price', trans('elshop::article.purchasing_price')) }} <span class="text-danger">*</span>
             {{ Form::text('price', Input::get('price'), array('class' => 'form-control')) }}
             {{ $errors->first('price', '<span class="text-danger">:message</span>') }}
           </div>

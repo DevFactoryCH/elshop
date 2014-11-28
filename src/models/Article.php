@@ -12,8 +12,6 @@ class Article extends Eloquent {
   public static $rules = array(
     'name' => 'required',
     'price' => 'required|numeric',
-    'weight' => 'required|numeric',
-    'ean13' => 'numeric',
     'description' => 'required',
   );
 

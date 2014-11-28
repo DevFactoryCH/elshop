@@ -15,7 +15,7 @@
           {{ Form::open(array('route' => array($prefix . 'articles.update', $article->id), 'method' => 'PUT')) }}
             <div class="row">
               <div class="form-group col-sm-8">
-                {{ Form::label('name', trans('elshop::article.name')) }}
+                {{ Form::label('name', trans('elshop::article.name')) }} <span class="text-danger">*</span>
                 {{ Form::text('name', $article->content->name, array('class' => 'form-control')) }}
                 {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
               </div>
@@ -34,13 +34,13 @@
               {{ $errors->first('teaser', '<span class="text-danger">:message</span>') }}
             </div>
             <div class="form-group">
-              {{ Form::label('description', trans('elshop::article.description')) }}
+              {{ Form::label('description', trans('elshop::article.description')) }} <span class="text-danger">*</span>
               {{ Form::textarea('description', $article->content->description, array('class' => 'form-control')) }}
               {{ $errors->first('description', '<span class="text-danger">:message</span>') }}
             </div>
             <div class="row">
               <div class="form-group col-sm-3">
-                {{ Form::label('price', trans('elshop::article.purchasing_price')) }}
+                {{ Form::label('price', trans('elshop::article.purchasing_price')) }} <span class="text-danger">*</span>
                 {{ Form::text('price', $article->purchasing->price / 100, array('class' => 'form-control')) }}
                 {{ $errors->first('price', '<span class="text-danger">:message</span>') }}
               </div>
@@ -63,7 +63,7 @@
                 {{ $errors->first('ean13', '<span class="text-danger">:message</span>') }}
               </div>
             </div>
-            {{ Form::submit(trans('article.edit'), array('class' => 'btn btn-primary')) }}
+            {{ Form::submit(trans('elshop::article.edit'), array('class' => 'btn btn-primary')) }}
           {{ Form::close() }}
         </div>
       </div>

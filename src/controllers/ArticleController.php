@@ -89,7 +89,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article_price->currency_id = Input::get('currency');
     $article_price->save();
 
-    return Redirect::route($this->prefix . 'articles.index');
+    return Redirect::route($this->prefix . 'articles.edit', $article->id);
   }
 
 
