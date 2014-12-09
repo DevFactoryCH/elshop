@@ -13,6 +13,11 @@
               {{ Form::text('name', $brand->name, array('class' => 'form-control')) }}
               {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
             </div>
+            <div class="form-group">
+              {{ Form::label('website', trans('elshop::brand.website')) }}
+              {{ Form::text('website', $brand->website, array('class' => 'form-control')) }}
+              {{ $errors->first('website', '<span class="text-danger">:message</span>') }}
+            </div>
             {{ Form::singleUpload('image', Lang::get('pages.form_image'), $brand, 'image') }}
             {{ Form::submit(trans('brand.edit'), array('class' => 'btn btn-primary')) }}
           {{ Form::close() }}

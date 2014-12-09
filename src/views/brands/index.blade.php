@@ -11,13 +11,15 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Brand</th>
+            <th>@lang('elshop::brand.name')</th>
+            <th>@lang('elshop::brand.website')</th>
             <th></th>
           </tr>
         </thead>
         @foreach ($brands as $brand)
           <tr>
             <td>{{ $brand->name }}</td>
+            <td>{{ $brand->website }}</td>
             <td class="text-right">
               {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE', 'class' => 'btn-group')) }}
                 <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">

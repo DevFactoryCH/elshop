@@ -50,6 +50,7 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
 
     $brand = new Brand();
     $brand->name = Input::get('name');
+    $brand->website = Input::get('website');
     $brand->status = TRUE;
     $brand->save();
 
@@ -101,6 +102,7 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
 
     $brand = Brand::find($id);
     $brand->name = Input::get('name');
+    $brand->website = Input::get('website');
     $brand->save();
 
     Admin::handleFileUpload('image', $brand, 'image');
