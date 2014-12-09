@@ -9,6 +9,7 @@
           {{ Form::text('name', Input::get('name'), array('class' => 'form-control')) }}
           {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
         </div>
+        {{ Form::singleUpload('image', Lang::get('elshop::brand.form_image'), NULL, 'image') }}
         {{ Form::submit(trans('brand.add'), array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}
     </div>

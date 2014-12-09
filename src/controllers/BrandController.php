@@ -6,6 +6,7 @@ use Input;
 use Redirect;
 use Validator;
 use Config;
+use Admin;
 
 use Devfactory\Elshop\Models\Brand;
 
@@ -51,6 +52,9 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
     $brand->name = Input::get('name');
     $brand->status = TRUE;
     $brand->save();
+
+    Admin::handleFileUpload('image', $brand, 'image');
+
 
     return Redirect::route($this->prefix . 'brands.index');
   }
@@ -98,6 +102,8 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
     $brand = Brand::find($id);
     $brand->name = Input::get('name');
     $brand->save();
+
+    Admin::handleFileUpload('image', $brand, 'image');
 
     return Redirect::route($this->prefix . 'brands.index');
   }
