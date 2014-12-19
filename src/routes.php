@@ -18,6 +18,7 @@ Route::group(array('prefix' => $prefix), function() use ($prefix) {
   Route::resource('articles', 'Devfactory\Elshop\Controllers\ArticleController');
   Route::resource('languages', 'Devfactory\Elshop\Controllers\LanguageController');
   Route::resource('currencies', 'Devfactory\Elshop\Controllers\CurrencyController');
+  Route::resource('parcels', 'Devfactory\Elshop\Controllers\ParcelController');
 
   Route::post('articles/store_price/{id}', array(
     'as' => $prefix . '.articles.store_price',
