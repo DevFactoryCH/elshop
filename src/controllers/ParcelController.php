@@ -27,7 +27,7 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    return View::make('elshop::currencies.create');
+    return View::make('elshop::parcels.create');
   }
 
 
