@@ -3,7 +3,7 @@
 @section('content')
 
   <p>
-    <a href="{{ route($prefix . 'brands.create') }}" class="btn btn-primary">Add a brand</a>
+    <a href="{{ route($prefix . 'parcels.create') }}" class="btn btn-primary">@lang('elshop::parcel.add')</a>
   </p>
 
   <div class="box box-primary">
@@ -11,21 +11,23 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>@lang('elshop::brand.name')</th>
-            <th>@lang('elshop::brand.website')</th>
+            <th>@lang('elshop::parcel.min')</th>
+            <th>@lang('elshop::parcel.max')</th>
+            <th>@lang('elshop::parcel.price')</th>
             <th></th>
           </tr>
         </thead>
-        @foreach ($brands as $brand)
+        @foreach ($parcels as $parcel)
           <tr>
-            <td>{{ $brand->name }}</td>
-            <td>{{ $brand->website }}</td>
+            <td>{{ $parcel->min }}</td>
+            <td>{{ $parcel->max }}</td>
+            <td>{{ $parcel->price / 100 }}</td>
             <td class="text-right">
-              {{ Form::open(array('route' => array($prefix . 'brands.destroy', $brand->id), 'method' => 'DELETE', 'class' => 'btn-group')) }}
-                <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
-                  @lang('elshop::brand.edit')
-                </a>
-                {{ Form::submit(trans('brand.delete'), array('class' => 'btn btn-danger btn-xs')) }}
+              {{ Form::open(array('route' => array($prefix . 'parcels.destroy', $parcel->id), 'method' => 'DELETE', 'class' => '')) }}
+                {{ Form::submit(trans('elshop::parcel.delete'), array('class' => 'btn btn-danger btn-xs')) }}
+              {{ Form::close() }}
+              {{ Form::open(array('route' => array($prefix . 'parcels.edit', $parcel->id), 'method' => 'GET', 'class' => '')) }}
+                {{ Form::submit(trans('elshop::parcel.edit'), array('class' => 'btn btn-primary btn-xs')) }}
               {{ Form::close() }}
             </td>
           </tr>

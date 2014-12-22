@@ -7,19 +7,23 @@
     <div class="col-sm-8">
       <div class="box box-primary">
         <div class="box-body">
-          {{ Form::open(array('route' => array($prefix . 'brands.update', $brand->id), 'method' => 'PUT', 'files' => TRUE)) }}
-            <div class="form-group">
-              {{ Form::label('name', trans('brand.name')) }}
-              {{ Form::text('name', $brand->name, array('class' => 'form-control')) }}
-              {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
+          {{ Form::open(array('route' => array($prefix . 'parcels.update', $parcel->id), 'method' => 'PUT', 'files' => TRUE)) }}
+           <div class="form-group">
+              {{ Form::label('min', trans('elshop::parcel.min')) }}
+              {{ Form::text('min', $parcel->min, array('class' => 'form-control')) }}
+              {{ $errors->first('min', '<span class="text-danger">:message</span>') }}
             </div>
             <div class="form-group">
-              {{ Form::label('website', trans('elshop::brand.website')) }}
-              {{ Form::text('website', $brand->website, array('class' => 'form-control')) }}
-              {{ $errors->first('website', '<span class="text-danger">:message</span>') }}
+              {{ Form::label('max', trans('elshop::parcel.max')) }}
+              {{ Form::text('max', $parcel->max, array('class' => 'form-control')) }}
+              {{ $errors->first('max', '<span class="text-danger">:message</span>') }}
             </div>
-            {{ Form::singleUpload('image', Lang::get('pages.form_image'), $brand, 'image') }}
-            {{ Form::submit(trans('brand.edit'), array('class' => 'btn btn-primary')) }}
+            <div class="form-group">
+              {{ Form::label('price', trans('elshop::parcel.price')) }}
+              {{ Form::text('price', $parcel->price / 100, array('class' => 'form-control')) }}
+              {{ $errors->first('price', '<span class="text-danger">:message</span>') }}
+            </div>
+            {{ Form::submit(trans('elshop::parcel.edit'), array('class' => 'btn btn-primary')) }}
           {{ Form::close() }}
         </div>
       </div>

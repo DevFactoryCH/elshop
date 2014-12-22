@@ -15,8 +15,8 @@ class CreateParcelsTable extends Migration {
     Schema::create('parcels', function(Blueprint $table)
     {
       $table->increments('id');
-      $table->decimal('min');
-      $table->decimal('max');
+      $table->float('min');
+      $table->float('max')->nullable();
       $table->integer('price');
     });
   }

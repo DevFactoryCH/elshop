@@ -7,6 +7,8 @@ use Redirect;
 use Validator;
 use Config;
 
+use Devfactory\Elshop\Models\Parcel;
+
 class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
 {
   /**
@@ -16,7 +18,9 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
+    $parcels = Parcel::all();
 
+    return View::make('elshop::parcels.index', compact('parcels'));
   }
 
 
@@ -38,23 +42,21 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function store()
   {
-    $validator = Validator::make(Input::All(), Currency::$rules);
+    $validator = Validator::make(Input::All(), Parcel::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $currency = new Currency();
-    $currency->name = Input::get('name');
-    $currency->iso_code = Input::get('iso_code');
-    $currency->sign = Input::get('sign');
-    $currency->status = TRUE;
-    $currency->default = FALSE;
-    if (!Currency::count()) {
-      $currency->default = TRUE;
+    $parcel = new Parcel();
+    $parcel->min = Input::get('min');
+    $parcel->max = NULL;
+    if (Input::has('max')) {
+      $parcel->max = Input::get('max');
     }
-    $currency->save();
+    $parcel->price = Input::get('price') * 100;
+    $parcel->save();
 
-    return Redirect::route($this->prefix . 'currencies.index');
+    return Redirect::route($this->prefix . 'parcels.index');
   }
 
 
@@ -78,9 +80,9 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function edit($id)
   {
-    $brand = Brand::find($id);
+    $parcel = Parcel::find($id);
 
-    return View::make('elshop::brands.edit', compact('brand'));
+    return View::make('elshop::parcels.edit', compact('parcel'));
   }
 
 
@@ -92,16 +94,21 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function update($id)
   {
-    $validator = Validator::make(Input::All(), Brand::$rules);
+    $validator = Validator::make(Input::All(), Parcel::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $brand = Brand::find($id);
-    $brand->name = Input::get('name');
-    $brand->save();
+    $parcel = Parcel::find($id);
+    $parcel->min = Input::get('min');
+    $parcel->max = NULL;
+    if (Input::has('max')) {
+      $parcel->max = Input::get('max');
+    }
+    $parcel->price = Input::get('price');
+    $parcel->save();
 
-    return Redirect::route($this->prefix . 'brands.index');
+    return Redirect::route($this->prefix . 'parcels.index');
   }
 
 
@@ -113,8 +120,8 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function destroy($id)
   {
-    $currency = Currency::find($id);
-    $currency->delete();
+    $parcel = Parcel::find($id);
+    $parcel->delete();
 
     return Redirect::back();
   }
