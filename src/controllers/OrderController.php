@@ -40,4 +40,18 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
     return View::make('elshop::orders.show', compact('order', 'tva', 'parcel'));
   }
 
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function destroy($id)
+  {
+    $order = Order::find($id);
+    $order->delete();
+
+    return Redirect::back();
+  }
+
 }
