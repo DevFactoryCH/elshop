@@ -2,66 +2,110 @@
 
 @section('content')
 
-  <div class="row">
+  <section class="content invoice">
+    <!-- title row -->
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="page-header">
+          <i class="fa fa-globe"></i> La Guilde SA
+          <small class="pull-right">Date : {{ $order->created_at->format('d.m.Y') }}</small>
+        </h2>
+      </div><!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+      <div class="col-sm-4 invoice-col">
+        Facturation
+        <address>
+          <strong>{{ $order->invoice->firstname . ' ' . $order->invoice->lastname }}</strong><br>
+          {{ $order->invoice->address }}<br>
+          {{ $order->invoice->zip . ' ' . $order->invoice->locality }}<br>
+          {{ $order->invoice->email }}<br>
+        </address>
+      </div><!-- /.col -->
+      <div class="col-sm-4 invoice-col">
+        Livraison
+        <address>
+          <strong>{{ $order->delivery->firstname . ' ' . $order->invoice->lastname }}</strong><br>
+          {{ $order->delivery->address }}<br>
+          {{ $order->delivery->zip . ' ' . $order->invoice->locality }}<br>
+          {{ $order->delivery->email }}<br>
+        </address>
+      </div><!-- /.col -->
+      <div class="col-sm-4 invoice-col">
+        <b>Commande Réf. :</b> {{ $order->reference }}<br>
+        <b>Date de paiement :</b> {{ $order->payment_at->format('d.m.Y') }}<br>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
 
-    <div class="col-sm-8">
-
-      <div class="box">
-
-        <div class="box-header">
-          <h3 class="box-title">La Guilde - Commande Réf. {{ $order->reference }}</h3>
-        </div>
-
-        <div class="box-body">
-
-          <div class="row">
-            <div class="col-sm-6">
-              {{ $order->invoice->email }}<br>
-              {{ $order->invoice->firstname . ' ' . $order->invoice->lastname }}<br>
-              {{ $order->invoice->address }}<br>
-              {{ $order->invoice->zip . ' ' . $order->invoice->locality }}<br>
-            </div>
-            <div class="col-sm-6">
-              {{ $order->delivery->email }}<br>
-              {{ $order->delivery->firstname . ' ' . $order->invoice->lastname }}<br>
-              {{ $order->delivery->address }}<br>
-              {{ $order->delivery->zip . ' ' . $order->invoice->locality }}<br>
-            </div>
-          </div>
-
-          <h3>Détails de la commande</h3>
-
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Article</th>
-              </tr>
-            </thead>
+    <!-- Table row -->
+    <div class="row">
+      <div class="col-xs-12 table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Qty</th>
+              <th>Product</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
             @foreach ($order->details()->get() as $article)
               <tr>
-                <td>{{ $article->name }}</td>
                 <td>{{ $article->quantity }}</td>
-                <td class="text-right">{{ number_format($article->quantity * $article->price / 100, 2, '.', "'") }}</td>
+                <td>{{ $article->name }}</td>
+                <td>{{ number_format($article->quantity * $article->price / 100, 2, '.', "'") }} CHF</td>
               </tr>
             @endforeach
-            <tr>
-              <td>Total</td>
-              <td>{{ $order->quantity() }}</td>
-              <td class="text-right">{{ number_format($order->total(), 2, '.', "'") }}</td>
-            </tr>
+          </tbody>
+        </table>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <!-- accepted payments column -->
+      <div class="col-xs-6">
+        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+          <strong>Adresse de retour :</strong><br>
+          La Guilde SA<br>
+          Rue Dr César-Roux 26<br>
+          1005 Lausanne
+        </p>
+      </div><!-- /.col -->
+      <div class="col-xs-6">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th style="width:50%">Subtotal:</th>
+                <td>{{ number_format($order->total(), 2, '.', "'") }} CHF</td>
+              </tr>
+              <tr>
+                <th>Tax (8%)</th>
+                <td>{{ number_format($tva, 2, '.', "'") }} CHF</td>
+              </tr>
+              <tr>
+                <th>Shipping:</th>
+                <td>{{ number_format($parcel->price / 100, 2, '.', "'") }} CHF</td>
+              </tr>
+              <tr>
+                <th>Total :</th>
+                <td>{{ number_format($order->total($parcel->price) + $tva, 2, '.', "'") }} CHF</td>
+              </tr>
+            </tbody>
           </table>
-
         </div>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
 
-
+    <!-- this row will not appear when printing -->
+    <div class="row no-print">
+      <div class="col-xs-12">
+        <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+        <button class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>
+        <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
       </div>
-
     </div>
-
-    <div class="col-sm-4">
-
-    </div>
-
-  </div>
+  </section>
 
 @stop

@@ -8,6 +8,7 @@ use Validator;
 use Config;
 
 use Devfactory\Elshop\Models\Order;
+use Devfactory\Elshop\Models\Parcel;
 
 class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
 {
@@ -32,8 +33,11 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
   public function show($id)
   {
     $order = Order::find($id);
-    
-    return View::make('elshop::orders.show', compact('order'));
+    $total_weight = $order->totalWeight();
+    $parcel = Parcel::where('min', '<=', $total_weight)->where('max', '>=', $total_weight)->first();
+    $tva = $order->total() / 100 * 8;
+
+    return View::make('elshop::orders.show', compact('order', 'tva', 'parcel'));
   }
 
 }

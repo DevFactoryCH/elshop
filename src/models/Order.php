@@ -9,6 +9,13 @@ class Order extends Eloquent {
   public static $rules = array(
   );
 
+  public function getDates() {
+    return array(
+      'payment_at',
+      'created_at',
+    );
+  }
+
   /**
    * Get the detail from an order
    * 
@@ -33,6 +40,16 @@ class Order extends Eloquent {
     return $quantity;
   }
 
+  public function totalWeight() {
+    $carts = $this->details()->get();
+    $total = 0;
+    foreach ($carts as $cart) {
+      $total += $cart->weight * $cart->quantity;
+    }
+
+    return $total;
+  }
+
   /**
    * Get the total from the order details
    * 
@@ -44,7 +61,7 @@ class Order extends Eloquent {
     foreach ($carts as $cart) {
       $total += $cart->price * $cart->quantity;
     }
-    $total += $parcel * 100;
+    $total += $parcel;
 
     return $total / 100;
   }
