@@ -49,4 +49,12 @@ class Order extends Eloquent {
     return $total / 100;
   }
 
+  public function invoice() {
+    return $this->belongsTo('Devfactory\Elshop\Models\Address', 'invoice_id', 'id');
+  }
+
+  public function delivery() {
+    return $this->belongsTo('Devfactory\Elshop\Models\Address', 'delivery_id', 'id');
+  }
+
 }
