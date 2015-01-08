@@ -12,5 +12,9 @@ class Parcel extends Eloquent {
   );
 
   public $timestamps = FALSE;
+
+  public static function price($weight) {
+    
+  }
   
 }

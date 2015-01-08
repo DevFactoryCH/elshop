@@ -25,7 +25,7 @@
                 <a href="{{ route($prefix . 'brands.edit', $brand->id) }}" class="btn btn-success btn-xs">
                   @lang('elshop::brand.edit')
                 </a>
-                {{ Form::submit(trans('brand.delete'), array('class' => 'btn btn-danger btn-xs')) }}
+                {{ Form::submit(trans('elshop::brand.delete'), array('class' => 'btn btn-danger btn-xs')) }}
               {{ Form::close() }}
             </td>
           </tr>
