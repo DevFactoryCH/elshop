@@ -71,6 +71,8 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->brand_id = Input::get('brand');
     $article->save();
 
+    $article->addTerm(Input::get('term'));
+
     $default_language = Language::where('default', TRUE)->first();
 
     $article_language = new ArticleLanguage();
@@ -132,6 +134,10 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $article = Article::find($id);
+    $article_terms = $article->getTermsByVocabularyName($vocabulary_name);
+    foreach ($article_terms as $term) {
+      $article->current_term = $term;
+    }
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     $currencies = Currency::all();
@@ -169,6 +175,9 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
     $article->save();
+    // Remove all terms
+    $article->removeAllTerms();
+    $article->addTerm(Input::get('term'));
 
     $default_language = Language::where('default', TRUE)->first();
 
