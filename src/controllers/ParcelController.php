@@ -11,6 +11,15 @@ use Devfactory\Elshop\Models\Parcel;
 
 class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
 {
+  protected $types;
+
+  public function __construct() {
+    parent::__construct();
+    $this->types[] = trans('elshop::parcel.between');
+    $this->types[] = trans('elshop::parcel.less');
+    $this->types[] = trans('elshop::parcel.greater');
+  }  
+
   /**
    * Display a listing of the resource.
    *
@@ -18,7 +27,7 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $parcels = Parcel::all();
+    $parcels = Parcel::orderBy('price', 'ASC')->get();
 
     return View::make('elshop::parcels.index', compact('parcels'));
   }
@@ -31,7 +40,9 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    return View::make('elshop::parcels.create');
+    $types = $this->types;
+
+    return View::make('elshop::parcels.create', compact('types'));
   }
 
 
@@ -48,10 +59,11 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $parcel = new Parcel();
-    $parcel->min = Input::get('min');
+    $parcel->min = Input::get('min') * 100;
     $parcel->max = NULL;
+    $parcel->type = Input::get('type');
     if (Input::has('max')) {
-      $parcel->max = Input::get('max');
+      $parcel->max = Input::get('max') * 100;
     }
     $parcel->price = Input::get('price') * 100;
     $parcel->save();
@@ -81,8 +93,9 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
   public function edit($id)
   {
     $parcel = Parcel::find($id);
+    $types = $this->types;
 
-    return View::make('elshop::parcels.edit', compact('parcel'));
+    return View::make('elshop::parcels.edit', compact('parcel', 'types'));
   }
 
 
@@ -100,12 +113,13 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $parcel = Parcel::find($id);
-    $parcel->min = Input::get('min');
+    $parcel->min = Input::get('min') * 100;
     $parcel->max = NULL;
+    $parcel->type = Input::get('type');
     if (Input::has('max')) {
-      $parcel->max = Input::get('max');
+      $parcel->max = Input::get('max') * 100;
     }
-    $parcel->price = Input::get('price');
+    $parcel->price = Input::get('price') * 100;
     $parcel->save();
 
     return Redirect::route($this->prefix . 'parcels.index');
@@ -125,6 +139,7 @@ class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
 
     return Redirect::back();
   }
+
 
 
 }

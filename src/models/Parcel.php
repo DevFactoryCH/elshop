@@ -8,7 +8,8 @@ class Parcel extends Eloquent {
 
   public static $rules = array(
     'min' => 'required|numeric',
-    'max' => 'numeric',
+    'max' => 'required_if:type,0|numeric',
+    'price' => 'required|numeric',
   );
 
   public $timestamps = FALSE;
