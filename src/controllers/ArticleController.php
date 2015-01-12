@@ -44,7 +44,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $brands = array_flip($brands);
     $vocabulary_name = Config::get('elshop::vocabulary_name');
     $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
-    $terms = array('' => NULL);
+    $terms = array();
     foreach ($rubric->terms()->get() as $term) {
       $terms[$term->id] = $term->name;
     }
@@ -128,7 +128,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
 
     $vocabulary_name = Config::get('elshop::vocabulary_name');
     $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
-    $terms = array('' => NULL);
+    $terms = array();
     foreach ($rubric->terms()->get() as $term) {
       $terms[$term->id] = $term->name;
     }
