@@ -12,8 +12,9 @@
 */
 
 $prefix = Config::get('elshop::route_prefix');
+$before = Config::get('elshop::filter_before');
 
-Route::group(array('prefix' => $prefix), function() use ($prefix) {
+Route::group(array('prefix' => $prefix, 'before' => $before), function() use ($prefix) {
   Route::resource('brands', 'Devfactory\Elshop\Controllers\BrandController');
   Route::resource('articles', 'Devfactory\Elshop\Controllers\ArticleController');
   Route::resource('languages', 'Devfactory\Elshop\Controllers\LanguageController');
