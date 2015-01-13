@@ -10,7 +10,7 @@
   "require": {
     "php": ">=5.4.0",
     "illuminate/support": "4.1.x",
-    "devfactory/taxonomy": "2.0.3",
+    "devfactory/taxonomy": "2.0.*",
     "devfactory/imagecache": "2.1.*",
     "devfactory/media": "1.0.*",
     "gloudemans/shoppingcart": "~1.2"
