@@ -49,7 +49,7 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $data['status'] = TRUE;
-    Brand::create($data);
+    $brand = Brand::create($data);
 
     Admin::handleFileUpload('image', $brand, 'image');
 
@@ -98,6 +98,14 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $brand = Brand::find($id);
+    // Update the title and the alt for the logo
+    $logo = $brand->getMedia()->first();
+    if ($logo) {
+      $logo->alt = Input::get('media_alt');
+      $logo->title = Input::get('media_title');
+      $logo->save();
+    }
+    // Update the brand
     $brand->update($data);
 
     Admin::handleFileUpload('image', $brand, 'image');
