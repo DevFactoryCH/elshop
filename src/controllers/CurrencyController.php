@@ -82,9 +82,9 @@ class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function edit($id)
   {
-    $brand = Brand::find($id);
+    $currencie = Currency::find($id);
 
-    return View::make('elshop::brands.edit', compact('brand'));
+    return View::make('elshop::currencies.edit', compact('currencie'));
   }
 
 
@@ -96,16 +96,18 @@ class CurrencyController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function update($id)
   {
-    $validator = Validator::make(Input::All(), Brand::$rules);
+    $validator = Validator::make(Input::All(), Currency::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $brand = Brand::find($id);
-    $brand->name = Input::get('name');
-    $brand->save();
+    $currencie = Currency::find($id);
+    $currencie->name = Input::get('name');
+    $currencie->iso_code = Input::get('iso_code');
+    $currencie->sign = Input::get('sign');
+    $currencie->save();
 
-    return Redirect::route($this->prefix . 'brands.index');
+    return Redirect::route($this->prefix . 'currencies.index');
   }
 
 
