@@ -169,7 +169,9 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $article = Article::find($id);
-    $article->price = Input::get('price') * 100;
+    $article->purchasing->price = Input::get('price') * 100;
+    $article->purchasing->currency_id = Input::get('currency');
+    $article->purchasing->save();
     $article->sale_price = Input::get('sale_price') * 100;
     $article->weight = Input::get('weight');
     $article->ean13 = Input::get('ean13');
