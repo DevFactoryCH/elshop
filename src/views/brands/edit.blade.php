@@ -9,7 +9,7 @@
         <div class="box-body">
           {{ Form::open(array('route' => array($prefix . 'brands.update', $brand->id), 'method' => 'PUT', 'files' => TRUE)) }}
             <div class="form-group">
-              {{ Form::label('name', trans('brand.name')) }}
+              {{ Form::label('name', trans('elshop::brand.name')) }}
               {{ Form::text('name', $brand->name, array('class' => 'form-control')) }}
               {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
             </div>
@@ -19,7 +19,7 @@
               {{ $errors->first('website', '<span class="text-danger">:message</span>') }}
             </div>
             {{ Form::singleUpload('image', Lang::get('pages.form_image'), $brand, 'image') }}
-            {{ Form::submit(trans('brand.edit'), array('class' => 'btn btn-primary')) }}
+            {{ Form::submit(trans('elshop::brand.edit'), array('class' => 'btn btn-primary')) }}
           {{ Form::close() }}
         </div>
       </div>

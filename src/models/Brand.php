@@ -11,5 +11,11 @@ class Brand extends Eloquent {
   public static $rules = array(
     'name' => 'required'
   );
+
+  protected $fillable = [
+    'name',
+    'website',
+    'status',
+  ];
   
 }

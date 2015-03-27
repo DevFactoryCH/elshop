@@ -43,16 +43,13 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function store()
   {
-    $validator = Validator::make(Input::All(), Brand::$rules);
+    $validator = Validator::make($data = Input::All(), Brand::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
-    $brand = new Brand();
-    $brand->name = Input::get('name');
-    $brand->website = Input::get('website');
-    $brand->status = TRUE;
-    $brand->save();
+    $data['status'] = TRUE;
+    Brand::create($data);
 
     Admin::handleFileUpload('image', $brand, 'image');
 
@@ -95,15 +92,13 @@ class BrandController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function update($id)
   {
-    $validator = Validator::make(Input::All(), Brand::$rules);
+    $validator = Validator::make($data = Input::All(), Brand::$rules);
     if ($validator->fails()) {
       return Redirect::back()->withInput()->withErrors($validator);
     }
 
     $brand = Brand::find($id);
-    $brand->name = Input::get('name');
-    $brand->website = Input::get('website');
-    $brand->save();
+    $brand->update($data);
 
     Admin::handleFileUpload('image', $brand, 'image');
 
