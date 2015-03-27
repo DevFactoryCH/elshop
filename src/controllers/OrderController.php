@@ -38,7 +38,7 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
     }
     $total_weight = $order->totalWeight();
     $parcel = Parcel::where('min', '<=', $total_weight)->where('max', '>=', $total_weight)->first();
-    $tva = $order->total() / 100 * 8;
+    $tva = ceil($order->total() / 100 * 8);
     $total_order = $order->total();
     if ($parcel) {
       $total_order += $parcel->price;
