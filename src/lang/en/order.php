@@ -6,4 +6,5 @@ return array(
   'quantity' => 'Quantity',
   'total' => 'Total',
   'delete' => 'Delete',
+  'back' => 'Back',
 );

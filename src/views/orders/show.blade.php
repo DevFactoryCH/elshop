@@ -2,6 +2,10 @@
 
 @section('content')
 
+  <p>
+    <a href="{{ route($prefix . 'orders.index') }}" class="btn btn-primary">@lang('elshop::order.back')</a>
+  </p>
+
   <section class="content invoice">
     <!-- title row -->
     <div class="row">
@@ -34,7 +38,7 @@
       </div><!-- /.col -->
       <div class="col-sm-4 invoice-col">
         <b>Commande Réf. :</b> {{ $order->reference }}<br>
-        <b>Date de paiement :</b> {{ $order->payment_at->format('d.m.Y') }}<br>
+        <b>Date de paiement :</b> {{ ($order->payment_at) ? $order->payment_at->format('d.m.Y') : '' }}<br>
       </div><!-- /.col -->
     </div><!-- /.row -->
 
@@ -86,11 +90,11 @@
               </tr>
               <tr>
                 <th>Shipping:</th>
-                <td>{{ number_format($parcel->price / 100, 2, '.', "'") }} CHF</td>
+                <td>{{ ($parcel) ? number_format($parcel->price / 100, 2, '.', "'") : '0.00' }} CHF</td>
               </tr>
               <tr>
                 <th>Total :</th>
-                <td>{{ number_format($order->total($parcel->price) + $tva, 2, '.', "'") }} CHF</td>
+                <td>{{ number_format($total_order, 2, '.', "'") }} CHF</td>
               </tr>
             </tbody>
           </table>
