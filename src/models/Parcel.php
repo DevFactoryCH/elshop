@@ -3,6 +3,7 @@
 namespace Devfactory\Elshop\Models;
 
 use \Illuminate\Database\Eloquent\Model as Eloquent;
+use Config;
 
 class Parcel extends Eloquent {
 
@@ -19,7 +20,14 @@ class Parcel extends Eloquent {
    * @param  int $total    Can be the total price of the order or the total weight
    * @return int return False if we not found parcel price else we return the parcel price
    */
-  public static function getPrice($total) {
+  public static function getPrice($order) {
+    $parcel_type = Config::get('elshop::parcel_type');
+    $total = $order->total();
+
+    if ($parcel_type) {
+      $total = $order->totalWeight();
+    }
+    
     $parcels = Parcel::all();
     $total = $total * 100;
 

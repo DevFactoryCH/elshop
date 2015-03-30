@@ -90,7 +90,7 @@
               </tr>
               <tr>
                 <th>Shipping:</th>
-                <td>{{ ($parcel) ? number_format($parcel->price / 100, 2, '.', "'") : '0.00' }} CHF</td>
+                <td>{{ ($parcel) ? number_format($parcel / 100, 2, '.', "'") : '0.00' }} CHF</td>
               </tr>
               <tr>
                 <th>Total :</th>
