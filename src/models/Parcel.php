@@ -23,6 +23,9 @@ class Parcel extends Eloquent {
   public static function getPrice($order) {
     $parcel_type = Config::get('elshop::parcel_type');
     $total = $order->total();
+    if (!$total) {
+      return FALSE;
+    }
 
     if ($parcel_type) {
       $total = $order->totalWeight();
@@ -30,6 +33,29 @@ class Parcel extends Eloquent {
     
     $parcels = Parcel::all();
     $total = $total * 100;
+
+    foreach ($parcels as $parcel) {
+      if ($parcel->type == 0 && $total >= $parcel->min && $total <= $parcel->max) {
+        return $parcel->price;
+      }
+      elseif ($total <= $parcel->min && $parcel->type == 1) {
+        return $parcel->price;
+      }
+      elseif ($total >= $parcel->min && $parcel->type == 2) {
+        return $parcel->price;
+      }
+    }
+
+    return FALSE;
+  }
+
+  public static function getPriceByTotal($total) {    
+    $parcels = Parcel::all();
+    $total = $total * 100;
+
+    if (!$total) {
+      return FALSE;
+    }
 
     foreach ($parcels as $parcel) {
       if ($parcel->type == 0 && $total >= $parcel->min && $total <= $parcel->max) {
