@@ -12,13 +12,16 @@ use Devfactory\Elshop\Models\Parcel;
 class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
 {
   protected $types;
-  protected $weight;
 
   public function __construct() {
+    // Construct
     parent::__construct();
-    $this->types[] = trans('elshop::parcel.between');
-    $this->types[] = trans('elshop::parcel.less');
-    $this->types[] = trans('elshop::parcel.greater');
+    // Set the types array
+    $this->types = [
+      trans('elshop::parcel.between'),
+      trans('elshop::parcel.less'),
+      trans('elshop::parcel.greater'),
+    ];
   }  
 
   /**
