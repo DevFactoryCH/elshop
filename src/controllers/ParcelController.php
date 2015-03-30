@@ -12,6 +12,7 @@ use Devfactory\Elshop\Models\Parcel;
 class ParcelController extends \Devfactory\Elshop\Controllers\ElshopController
 {
   protected $types;
+  protected $weight;
 
   public function __construct() {
     parent::__construct();
