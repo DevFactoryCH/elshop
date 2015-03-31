@@ -28,6 +28,11 @@ Route::group(array('prefix' => $prefix, 'before' => $before), function() use ($p
     'uses' => 'Devfactory\Elshop\Controllers\ArticleController@storePrice',
   ));
 
+  Route::get('articles/{id}/status', array(
+    'as' => $prefix . '.articles.status',
+    'uses' => 'Devfactory\Elshop\Controllers\ArticleController@changeStatus',
+  ));
+
   Route::get('articles/destroy_price/{id}', array(
     'as' => $prefix . '.articles.destroy_price',
     'uses' => 'Devfactory\Elshop\Controllers\ArticleController@destroyPrice',
