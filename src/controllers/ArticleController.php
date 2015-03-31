@@ -25,7 +25,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $articles = Article::all();
+    $articles = Article::orderBy('created_at','DESC')->paginate(50);
 
     return View::make('elshop::articles.index', compact('articles'));
   }
@@ -69,6 +69,7 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->weight = Input::get('weight');
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
+    $article->status = true;
     $article->save();
 
     $article->addTerm(Input::get('term'));

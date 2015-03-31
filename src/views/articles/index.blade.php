@@ -56,5 +56,5 @@
       </table>
     </div>
   </div>
-
+  {{ $articles->links() }}
 @stop
