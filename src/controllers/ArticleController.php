@@ -225,4 +225,23 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
 
     return Redirect::back();
   }
+
+  public function changeStatus($id) {
+    $article = Article::find($id);
+
+    if (!$article) {
+      return Redirect::back();
+    }
+
+    if ($article->status) {
+      $article->status = FALSE;
+    }
+    else {
+      $article->status = TRUE;
+    }
+
+    $article->save();
+
+    return Redirect::back();
+  }
 }

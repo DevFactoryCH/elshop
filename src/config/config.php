@@ -13,4 +13,15 @@ return array(
   |
   */
   'filter_before' => 'admin-auth',
+
+   /*
+  |--------------------------------------------------------------------------
+  | El Shop parcel type
+  |--------------------------------------------------------------------------
+  |
+  | FALSE => parcel is calculate with the total price
+  | TRUE => parcel is calculate with the total weight
+  |
+   */
+  'parcel_type' => TRUE,
 );

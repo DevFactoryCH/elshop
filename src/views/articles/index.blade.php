@@ -30,6 +30,13 @@
             <td class="text-center">{{ $article->formatPrice() }}</td>
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
+            <td class="text-center">
+              @if ($article->status)
+                <a href="{{ route($prefix . 'articles.status', $article->id) }}" class="btn btn-success btn-xs">Actif</a>
+              @else
+                <a href="{{ route($prefix . 'articles.status', $article->id) }}" class="btn btn-danger btn-xs">Inactif</a>
+              @endif
+            </td>
             <td class="text-right">
               <div class="pull-right">
                 <div class="btn-group">

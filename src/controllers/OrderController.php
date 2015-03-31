@@ -36,13 +36,11 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
     if (!$order) {
       return Redirect::route($this->prefix . 'orders.index');
     }
-    $total_weight = $order->totalWeight();
-    $parcel = Parcel::where('min', '<=', $total_weight)->where('max', '>=', $total_weight)->first();
+
+    $parcel = Parcel::getPrice($order);
     $tva = ceil($order->total() / 100 * 8);
-    $total_order = $order->total();
-    if ($parcel) {
-      //$total_order += $parcel->price / 100;
-    }
+    $total_order = $order->total() + ($parcel / 100);
+
     $total_order += $tva;
 
     return View::make('elshop::orders.show', compact('order', 'tva', 'parcel', 'total_order'));
