@@ -25,7 +25,14 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-    $articles = Article::orderBy('created_at','DESC')->paginate(50);
+
+    if(Input::get('search', false)){
+      $articles = Article::whereHas('content', function($q) {
+        $q->where('name', 'LIKE', '%' . Input::get('search') . '%');
+      })->orderBy('created_at','DESC')->paginate(50);
+    }else{
+      $articles = Article::orderBy('created_at','DESC')->paginate(50);
+    }
 
     return View::make('elshop::articles.index', compact('articles'));
   }
