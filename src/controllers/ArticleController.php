@@ -98,8 +98,9 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
     $article->status = true;
-    $article->category_id = Input::get('category_id');
     $article->save();
+
+    $article->categories()->sync(Input::get('categories'));
 
     $default_language = Language::where('default', TRUE)->first();
 
@@ -201,6 +202,8 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
     $article->save();
+
+    $article->categories()->sync(Input::get('categories'));
 
     $default_language = Language::where('default', TRUE)->first();
 

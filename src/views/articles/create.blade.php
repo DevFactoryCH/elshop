@@ -16,13 +16,9 @@
             {{ Form::text('name', Input::get('name'), array('class' => 'form-control')) }}
             {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
           </div>
-          <div class="form-group col-sm-2">
+          <div class="form-group col-sm-4">
             {{ Form::label('brand', trans('elshop::article.brand')) }}
             {{ Form::select('brand', $brands, Input::get('brand'), array('class' => 'form-control')) }}
-          </div>
-          <div class="form-group col-sm-2">
-            {{ Form::label('category_id', trans('elshop::article.category')) }}
-            {{ Form::select('category_id', $categories, Input::get('category_id'), array('class' => 'form-control')) }}
           </div>
         </div>
         <div class="form-group">
@@ -59,6 +55,10 @@
             {{ Form::text('ean13', Input::get('ean13'), array('class' => 'form-control')) }}
             {{ $errors->first('ean13', '<span class="text-danger">:message</span>') }}
           </div>
+        </div>
+        <div class="form-group">
+          {{ Form::label('categories', trans('elshop::article.categories')) }}
+          {{ Form::select('categories[]', $categories, NULL, ['multiple', 'class' => 'form-control']) }}
         </div>
         {{ Form::submit(trans('elshop::article.add'), array('class' => 'btn btn-primary')) }}
       {{ Form::close() }}

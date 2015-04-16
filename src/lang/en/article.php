@@ -15,4 +15,5 @@ return array(
   'add' => 'Add',
   'edit' => 'Edit',
   'delete' => 'Delete',
+  'categories' => 'Categories',
 );

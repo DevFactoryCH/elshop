@@ -63,6 +63,10 @@
                 {{ $errors->first('ean13', '<span class="text-danger">:message</span>') }}
               </div>
             </div>
+            <div class="form-group">
+              {{ Form::label('categories', trans('elshop::article.categories')) }}
+              {{ Form::select('categories[]', $categories, $article->categories->lists('id'), ['multiple', 'class' => 'form-control']) }}
+            </div>
             {{ Form::submit(trans('elshop::article.edit'), array('class' => 'btn btn-primary')) }}
           {{ Form::close() }}
         </div>
