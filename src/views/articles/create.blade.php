@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 
+@section('header')
+  <h1>Articles</h1>
+@stop
+
+
 @section('content')
 
   <div class="box box-primary">
@@ -16,8 +21,8 @@
             {{ Form::select('brand', $brands, Input::get('brand'), array('class' => 'form-control')) }}
           </div>
           <div class="form-group col-sm-2">
-            {{ Form::label('term', trans('elshop::article.term')) }}
-            {{ Form::select('term', $terms, Input::get('term'), array('class' => 'form-control')) }}
+            {{ Form::label('category_id', trans('elshop::article.category')) }}
+            {{ Form::select('category_id', $categories, Input::get('category_id'), array('class' => 'form-control')) }}
           </div>
         </div>
         <div class="form-group">

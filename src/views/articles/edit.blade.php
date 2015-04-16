@@ -25,7 +25,7 @@
               </div>
               <div class="form-group col-sm-2">
                 {{ Form::label('term', trans('elshop::article.term')) }}
-                {{ Form::select('term', $terms, (isset($article->current_term->term_id)) ? $article->current_term->term_id : NULL, array('class' => 'form-control')) }}
+                {{ Form::select('term', $categories, (isset($article->category_id)) ? $article->category_id : NULL, array('class' => 'form-control')) }}
               </div>
             </div>
             <div class="form-group">

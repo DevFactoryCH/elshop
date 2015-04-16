@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 
+@section('header')
+  <h1>@lang('elshop::article.articles')</h1>
+@stop
+
 @section('content')
-
-
 
   <div class="row" style="margin-bottom:20px">
     <div class="col-xs-5 pull-left">

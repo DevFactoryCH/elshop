@@ -14,10 +14,31 @@ use Devfactory\Elshop\Models\Brand;
 use Devfactory\Elshop\Models\ArticleLanguage;
 use Devfactory\Elshop\Models\Language;
 use Devfactory\Elshop\Models\Currency;
+use Devfactory\Elshop\Models\Category;
 use Devfactory\Elshop\Models\ArticlePrice;
 
 class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
 {
+  protected $categories;
+
+  public function __construct() {
+    parent::__construct();
+    // Get the categories
+    $categories = Category::where('category_id', NULL)
+    ->orderBy('category', 'ASC')
+    ->get();
+
+    foreach ($categories as $category) {
+      $this->categories[$category->id] = $category->category;
+      foreach ($category->categories()->get() as $child) {
+        $this->categories[$child->id] = ' - ' . $child->category;
+        foreach ($child->categories()->get() as $row) {
+          $this->categories[$row->id] = ' -- ' . $row->category;
+        }
+      }
+    }
+  }
+
   /**
    * Display a listing of the resource.
    *
@@ -25,12 +46,12 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function index()
   {
-
-    if(Input::get('search', false)){
+    if (Input::get('search', false)) {
       $articles = Article::whereHas('content', function($q) {
         $q->where('name', 'LIKE', '%' . Input::get('search') . '%');
       })->orderBy('created_at','DESC')->paginate(50);
-    }else{
+    } 
+    else {
       $articles = Article::orderBy('created_at','DESC')->paginate(50);
     }
 
@@ -49,14 +70,14 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $currencies = array_flip($currencies);
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
-    $vocabulary_name = Config::get('elshop::vocabulary_name');
-    $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
-    $terms = array();
-    foreach ($rubric->terms()->get() as $term) {
-      $terms[$term->id] = $term->name;
-    }
+    $categories = $this->categories;
 
-    return View::make('elshop::articles.create', compact('brands', 'terms', 'currencies'));
+    return View::make('elshop::articles.create', compact(
+      'brands', 
+      'terms', 
+      'currencies',
+      'categories'
+    ));
   }
 
 
@@ -77,9 +98,8 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
     $article->status = true;
+    $article->category_id = Input::get('category_id');
     $article->save();
-
-    $article->addTerm(Input::get('term'));
 
     $default_language = Language::where('default', TRUE)->first();
 
@@ -133,19 +153,9 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function edit($id)
   {
-
-    $vocabulary_name = Config::get('elshop::vocabulary_name');
-    $rubric = Taxonomy::getVocabularyByName($vocabulary_name);
-    $terms = array();
-    foreach ($rubric->terms()->get() as $term) {
-      $terms[$term->id] = $term->name;
-    }
+    $categories = $this->categories;
 
     $article = Article::find($id);
-    $article_terms = $article->getTermsByVocabularyName($vocabulary_name);
-    foreach ($article_terms as $term) {
-      $article->current_term = $term;
-    }
     $brands = Brand::lists('id', 'name');
     $brands = array_flip($brands);
     $currencies = Currency::all();
@@ -159,7 +169,13 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $currencies_purchase = Currency::lists('id', 'iso_code');
     $currencies_purchase = array_flip($currencies_purchase);
 
-    return View::make('elshop::articles.edit', compact('article', 'brands', 'terms' , 'currencies', 'currencies_purchase'));
+    return View::make('elshop::articles.edit', compact(
+      'article', 
+      'brands', 
+      'categories' , 
+      'currencies', 
+      'currencies_purchase'
+    ));
   }
 
 
@@ -185,9 +201,6 @@ class ArticleController extends \Devfactory\Elshop\Controllers\ElshopController
     $article->ean13 = Input::get('ean13');
     $article->brand_id = Input::get('brand');
     $article->save();
-    // Remove all terms
-    $article->removeAllTerms();
-    $article->addTerm(Input::get('term'));
 
     $default_language = Language::where('default', TRUE)->first();
 
