@@ -34,6 +34,11 @@ Route::group(array('prefix' => $prefix, 'before' => $before), function() use ($p
     'uses' => 'Devfactory\Elshop\Controllers\ArticleController@changeStatus',
   ));
 
+  Route::get('categories/{id}/status', array(
+    'as' => $prefix . '.categories.status',
+    'uses' => 'Devfactory\Elshop\Controllers\CategoryController@changeStatus',
+  ));
+
   Route::get('articles/destroy_price/{id}', array(
     'as' => $prefix . '.articles.destroy_price',
     'uses' => 'Devfactory\Elshop\Controllers\ArticleController@destroyPrice',
