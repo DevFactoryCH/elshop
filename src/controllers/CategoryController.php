@@ -13,6 +13,22 @@ use Devfactory\Elshop\Models\Category;
 
 class CategoryController extends \Devfactory\Elshop\Controllers\ElshopController
 {
+  protected $categories;
+
+  public function __construct() {
+    parent::__construct();
+    // Categories
+    $categories = Category::where('category_id', NULL)->get();
+    $select_categories = [];
+    foreach ($categories as $category) {
+      $this->categories[$category->id] = $category->category;
+      foreach($category->categories()->get() as $child) {
+        $this->categories[$child->id] = ' - ' . $child->category;
+      }
+    }
+    $this->categories[NULL] = 'Parent';
+  }
+
   /**
    * Display a listing of the resource.
    *
@@ -35,8 +51,7 @@ class CategoryController extends \Devfactory\Elshop\Controllers\ElshopController
    */
   public function create()
   {
-    $categories = Category::where('category_id', NULL)->lists('category', 'id');
-    $categories[NULL] = 'Parent'; 
+    $categories = $this->categories;
 
     return View::make('elshop::categories.create', compact('categories'));
   }
@@ -95,8 +110,7 @@ class CategoryController extends \Devfactory\Elshop\Controllers\ElshopController
   public function edit($id)
   {
     $category = Category::find($id);
-    $categories = Category::where('category_id', NULL)->lists('category', 'id');
-    $categories[NULL] = 'Parent'; 
+    $categories = $this->categories();
 
     return View::make('elshop::categories.edit', compact(
       'categories',
