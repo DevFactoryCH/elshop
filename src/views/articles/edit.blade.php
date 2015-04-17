@@ -19,13 +19,9 @@
                 {{ Form::text('name', $article->content->name, array('class' => 'form-control')) }}
                 {{ $errors->first('name', '<span class="text-danger">:message</span>') }}
               </div>
-              <div class="form-group col-sm-2">
+              <div class="form-group col-sm-4">
                 {{ Form::label('brand', trans('elshop::article.brand')) }}
                 {{ Form::select('brand', $brands, $article->brand_id, array('class' => 'form-control')) }}
-              </div>
-              <div class="form-group col-sm-2">
-                {{ Form::label('term', trans('elshop::article.term')) }}
-                {{ Form::select('term', $categories, (isset($article->category_id)) ? $article->category_id : NULL, array('class' => 'form-control')) }}
               </div>
             </div>
             <div class="form-group">
