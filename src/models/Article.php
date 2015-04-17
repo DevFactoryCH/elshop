@@ -70,5 +70,9 @@ class Article extends Eloquent {
 
     return FALSE;
   }
+
+  public function categories() {
+    return $this->belongsToMany('Category', 'articles_categories');
+  }
   
 }
