@@ -110,7 +110,7 @@ class CategoryController extends \Devfactory\Elshop\Controllers\ElshopController
   public function edit($id)
   {
     $category = Category::find($id);
-    $categories = $this->categories();
+    $categories = $this->categories;
 
     return View::make('elshop::categories.edit', compact(
       'categories',
