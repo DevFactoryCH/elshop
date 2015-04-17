@@ -71,6 +71,10 @@ class Article extends Eloquent {
     return FALSE;
   }
 
+  /**
+   * Get the categories form the article
+   * @return Category categories
+   */
   public function categories() {
     return $this->belongsToMany('Category', 'articles_categories');
   }
