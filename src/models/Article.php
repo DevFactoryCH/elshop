@@ -76,7 +76,7 @@ class Article extends Eloquent {
    * @return Category categories
    */
   public function categories() {
-    return $this->belongsToMany('Category', 'articles_categories');
+    return $this->belongsToMany('Devfactory\Elshop\Models\Category', 'articles_categories');
   }
   
 }
