@@ -38,7 +38,7 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
     }
 
     $parcel = Parcel::getPrice($order);
-    $tva = ceil($order->total() / 100 * 8);
+    $tva = ceil($order->total() / 10 * 8 ) / 10;
     $total_order = $order->total() + ($parcel / 100);
 
     //$total_order += $tva;
