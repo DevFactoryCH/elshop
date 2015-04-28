@@ -41,7 +41,7 @@ class OrderController extends \Devfactory\Elshop\Controllers\ElshopController
     $tva = ceil($order->total() / 100 * 8);
     $total_order = $order->total() + ($parcel / 100);
 
-    $total_order += $tva;
+    //$total_order += $tva;
 
     return View::make('elshop::orders.show', compact('order', 'tva', 'parcel', 'total_order'));
   }
