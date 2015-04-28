@@ -2,10 +2,6 @@
 
 @section('content')
 
-  <p>
-    <a href="{{ route($prefix . 'orders.index') }}" class="btn btn-primary">@lang('elshop::order.back')</a>
-  </p>
-
   <section class="content invoice">
     <!-- title row -->
     <div class="row">
