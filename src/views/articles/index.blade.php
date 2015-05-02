@@ -36,7 +36,9 @@
           <tr>
             <td>
               <a href="{{ route($prefix . 'articles.edit', $article->id) }}">
-                {{ $article->content->name }}
+                @if (isset($article->content->name))
+                  {{ $article->content->name }}
+                @endif
               </a>
             </td>
             <td class="text-center">{{ number_format($article->purchasing->price / 100, 2, '.', "'") . ' ' . $article->purchasing->currency->sign }}</td>
