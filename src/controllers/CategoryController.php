@@ -19,7 +19,6 @@ class CategoryController extends \Devfactory\Elshop\Controllers\ElshopController
     parent::__construct();
     // Categories
     $categories = Category::where('category_id', NULL)->get();
-    $select_categories = [];
     foreach ($categories as $category) {
       $this->categories[$category->id] = $category->category;
       foreach($category->categories()->get() as $child) {
