@@ -33,6 +33,9 @@ class Category extends Eloquent {
     $categories[] = $this->id;
     foreach ($this->categories()->get() as $category) {
       $categories[] = $category->id;
+      foreach ($category->categories()->get() as $children) {
+        $categories[] = $children->id;
+      }
     }
 
     return $categories;
