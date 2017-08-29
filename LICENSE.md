@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2017 Greg Marineau <greg.marineau@devfactory.ch>
+Copyright (c) 2017 DevFactory Sàrl <developer@devfactory.ch>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
