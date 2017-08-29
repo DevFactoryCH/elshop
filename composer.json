@@ -9,11 +9,9 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/support": "4.1.x",
-    "devfactory/taxonomy": "2.0.*",
-    "devfactory/imagecache": "2.1.*",
-    "devfactory/media": "1.0.*",
-    "gloudemans/shoppingcart": "~1.2"
+    "zizaco/entrust": "5.2.x-dev",
+    "dimsav/laravel-translatable": "^7.3",
+    "illuminate/support": "^5.4"
   },
   "autoload": {
     "classmap": [
