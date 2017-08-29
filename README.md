@@ -1,3 +1,4 @@
+[![Build Status](https://api.travis-ci.org/DevFactoryCH/elshop.svg?branch=2.0-dev)](https://travis-ci.org/DevFactoryCH/elshop)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
 #ElShop
