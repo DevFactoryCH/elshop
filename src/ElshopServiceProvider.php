@@ -35,7 +35,7 @@ class ElshopServiceProvider extends ServiceProvider {
     $this->setupRoutes($this->app->router);
     $this->publishConfig();
     $this->publishFiles();
-    $this->publishMigration();
+    //$this->publishMigration();
   }
 
   /**
