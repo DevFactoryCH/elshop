@@ -10,10 +10,14 @@
 |
 */
 Route::group([
-    'namespace'  => 'Devfactory\Elshop\app\Http\Controllers',
+    'namespace'  => 'Devfactory\Elshop\App\Http\Controllers',
     'middleware' => 'web',
     'prefix'     => config('elshop.route_prefix'), 
   ],
   function () {
     Route::get('tests', 'TestsController@index');
 });
+
+Route::get('/', [
+  'as' => 'front',
+]);
