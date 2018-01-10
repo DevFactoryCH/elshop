@@ -16,7 +16,9 @@ Then from the terminal run
 
 Then register the  service provider by opening `app/config/app.php`
 
-    'Devfactory\Elshop\ElshopServiceProvider'
+```php
+'Devfactory\Elshop\ElshopServiceProvider'
+```
 
 If you want you can publish the config files if you want to change them
 
