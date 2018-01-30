@@ -30,7 +30,7 @@ class ElshopServiceProvider extends ServiceProvider {
   public function boot()
   {
     $this->loadViewsFrom(resource_path('views/vendor/backpack/base'), 'elshop');
-    $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'elshop');
+    $this->loadViewsFrom(realpath(__DIR__ . '/resources/views'), 'elshop');
 
     $this->setupRoutes($this->app->router);
     $this->publishConfig();
