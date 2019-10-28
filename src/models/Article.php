@@ -18,8 +18,8 @@ class Article extends Eloquent {
 
     public function getPurchasingPriceAttribute()
     {
-        if ($this->purchasing) {
-            return number_format($article->purchasing->price / 100, 2, '.', "'") . ' ' . $article->purchasing->currency->sign;
+        if ($this->purchasing && $this->purchasing->currency) {
+            return number_format($this->purchasing->price / 100, 2, '.', "'") . ' ' . $this->purchasing->currency->sign;
         }
 
         return null;
