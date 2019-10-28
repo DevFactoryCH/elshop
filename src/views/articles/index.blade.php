@@ -41,7 +41,7 @@
                 @endif
               </a>
             </td>
-            <td class="text-center">{{ number_format($article->purchasing->price / 100, 2, '.', "'") . ' ' . $article->purchasing->currency->sign }}</td>
+            <td class="text-center">{{ $article->purchasing_price }}</td>
             <td class="text-center">{{ $article->formatPrice() }}</td>
             <td class="text-center">{{ $article->brand->name }}</td>
             <td class="text-center">{{ $article->weight }} KGr.</td>
